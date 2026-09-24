@@ -18,19 +18,29 @@ export async function GET() {
       where: { userId: user.id },
     });
 
-    const completedTopicIds = new Set(
-      progressRecords.filter((p) => p.completed && p.itemType === "topic").map((p) => p.itemId)
-    );
+    // Group progress records strictly by learningPathId
+    const progressByPath = new Map<string, Set<string>>();
+    const allCompletedTopicKeys = new Set<string>();
+    const allCompletedProjectKeys = new Set<string>();
+    const allCompletedProblemKeys = new Set<string>();
 
-    const completedProjectIds = new Set(
-      progressRecords.filter((p) => p.completed && p.itemType === "project").map((p) => p.itemId)
-    );
+    progressRecords.forEach((pr) => {
+      if (!pr.completed) return;
+      const globalKey = `${pr.learningPathId}:${pr.itemId}`;
+      if (pr.itemType === "topic") {
+        allCompletedTopicKeys.add(globalKey);
+        if (!progressByPath.has(pr.learningPathId)) {
+          progressByPath.set(pr.learningPathId, new Set());
+        }
+        progressByPath.get(pr.learningPathId)!.add(pr.itemId);
+      } else if (pr.itemType === "project") {
+        allCompletedProjectKeys.add(globalKey);
+      } else if (pr.itemType === "problem") {
+        allCompletedProblemKeys.add(globalKey);
+      }
+    });
 
-    const completedProblemIds = new Set(
-      progressRecords.filter((p) => p.completed && p.itemType === "problem").map((p) => p.itemId)
-    );
-
-    // Parse paths and compute progress
+    // Parse paths and compute progress per path
     const pathsWithStats = paths.map((p) => {
       let content: any = {};
       try {
@@ -42,16 +52,20 @@ export async function GET() {
         0
       );
 
+      const pathCompletedTopics = progressByPath.get(p.id) || new Set();
       let completedInPath = 0;
       (content.modules || []).forEach((m: any, mIdx: number) => {
         (m.topics || []).forEach((_: any, tIdx: number) => {
-          if (completedTopicIds.has(`mod-${m.order || mIdx + 1}-top-${tIdx}`)) {
+          const topicKey = `mod-${m.order || mIdx + 1}-top-${tIdx}`;
+          if (pathCompletedTopics.has(topicKey)) {
             completedInPath++;
           }
         });
       });
 
-      const percent = totalTopics > 0 ? Math.round((completedInPath / totalTopics) * 100) : 0;
+      const percent = totalTopics > 0 
+        ? Math.min(100, Math.round((completedInPath / totalTopics) * 100)) 
+        : 0;
 
       return {
         id: p.id,
@@ -71,17 +85,17 @@ export async function GET() {
       };
     });
 
-    // Compute streak from recent completions
-    const totalCompleted = completedTopicIds.size + completedProjectIds.size + completedProblemIds.size;
+    // Compute streak from total completed items across all paths
+    const totalCompleted = allCompletedTopicKeys.size + allCompletedProjectKeys.size + allCompletedProblemKeys.size;
     const streakDays = totalCompleted > 0 ? Math.min(14, Math.max(1, Math.ceil(totalCompleted / 2))) : 0;
 
     return NextResponse.json({
       success: true,
       stats: {
         totalSavedPaths: paths.length,
-        totalCompletedTopics: completedTopicIds.size,
-        totalCompletedProjects: completedProjectIds.size,
-        totalCompletedProblems: completedProblemIds.size,
+        totalCompletedTopics: allCompletedTopicKeys.size,
+        totalCompletedProjects: allCompletedProjectKeys.size,
+        totalCompletedProblems: allCompletedProblemKeys.size,
         streakDays,
       },
       paths: pathsWithStats,
