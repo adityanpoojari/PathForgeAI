@@ -30,6 +30,7 @@ export default function DashboardPage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
+  const [filterTab, setFilterTab] = useState<"all" | "active" | "completed">("all");
 
   useEffect(() => {
     // Check auth status
@@ -77,8 +78,6 @@ export default function DashboardPage() {
       </div>
     );
   }
-
-  const [filterTab, setFilterTab] = useState<"all" | "active" | "completed">("all");
 
   const stats = data?.stats || {
     totalSavedPaths: 0,
