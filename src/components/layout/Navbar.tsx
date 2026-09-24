@@ -1,23 +1,50 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   Compass,
   Sparkles,
   Menu,
   X,
-  ArrowRight,
   User,
   LayoutDashboard,
-  ShieldCheck,
+  LogOut,
+  Settings,
 } from "lucide-react";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
   const pathname = usePathname();
+  const router = useRouter();
+
+  // Check authentication status on mount & whenever pathname changes
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.authenticated && data.user) {
+          setUser(data.user);
+        } else {
+          setUser(null);
+        }
+      })
+      .catch(() => setUser(null));
+  }, [pathname]);
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+      setUser(null);
+      router.push("/");
+      router.refresh();
+    } catch {
+      window.location.href = "/";
+    }
+  };
 
   const navLinks = [
     { name: "Generator", href: "/generate" },
@@ -76,20 +103,54 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
 
-            <Link
-              href="/dashboard"
-              className="px-3.5 py-1.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-800 transition-all flex items-center gap-1.5"
-            >
-              <LayoutDashboard className="w-4 h-4 text-indigo-500" />
-              <span>Dashboard</span>
-            </Link>
+            {user ? (
+              /* Authenticated User Pill & Sign Out */
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/dashboard"
+                  className="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700/80 border border-slate-200/80 dark:border-slate-700 transition-all flex items-center gap-2 shadow-xs"
+                >
+                  <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-indigo-600 to-emerald-400 text-white flex items-center justify-center text-[10px] font-bold uppercase">
+                    {user.name ? user.name[0] : "U"}
+                  </div>
+                  <span className="max-w-[120px] truncate">{user.name || user.email?.split("@")[0]}</span>
+                </Link>
 
-            <Link
-              href="/auth/login"
-              className="px-3.5 py-1.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-colors"
-            >
-              Sign In
-            </Link>
+                <Link
+                  href="/settings"
+                  className="p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  title="Settings"
+                >
+                  <Settings className="w-4 h-4" />
+                </Link>
+
+                <button
+                  onClick={handleLogout}
+                  className="p-2 rounded-xl text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
+                  title="Sign Out"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
+            ) : (
+              /* Guest Actions (Dashboard & Sign In) */
+              <>
+                <Link
+                  href="/dashboard"
+                  className="px-3.5 py-1.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-800 transition-all flex items-center gap-1.5"
+                >
+                  <LayoutDashboard className="w-4 h-4 text-indigo-500" />
+                  <span>Dashboard</span>
+                </Link>
+
+                <Link
+                  href="/auth/login"
+                  className="px-3.5 py-1.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-colors"
+                >
+                  Sign In
+                </Link>
+              </>
+            )}
 
             <Link
               href="/generate"
@@ -131,31 +192,79 @@ export function Navbar() {
           </div>
 
           <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2.5">
-            <Link
-              href="/dashboard"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800"
-            >
-              <LayoutDashboard className="w-4 h-4 text-indigo-500" />
-              <span>My Dashboard</span>
-            </Link>
+            {user ? (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-600 to-emerald-400 text-white flex items-center justify-center text-xs font-bold uppercase">
+                      {user.name ? user.name[0] : "U"}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-bold text-slate-900 dark:text-white">
+                        {user.name || user.email?.split("@")[0]}
+                      </span>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 truncate max-w-[180px]">
+                        {user.email}
+                      </span>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 transition-colors"
+                    title="Sign Out"
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </button>
+                </div>
 
-            <div className="grid grid-cols-2 gap-2">
-              <Link
-                href="/auth/login"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800"
-              >
-                Sign In
-              </Link>
-              <Link
-                href="/auth/signup"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium"
-              >
-                Register
-              </Link>
-            </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  >
+                    <LayoutDashboard className="w-3.5 h-3.5 text-indigo-500" />
+                    <span>Dashboard</span>
+                  </Link>
+                  <Link
+                    href="/settings"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  >
+                    <Settings className="w-3.5 h-3.5 text-slate-500" />
+                    <span>Settings</span>
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <>
+                <Link
+                  href="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800"
+                >
+                  <LayoutDashboard className="w-4 h-4 text-indigo-500" />
+                  <span>My Dashboard</span>
+                </Link>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    href="/auth/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/auth/signup"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium"
+                  >
+                    Register
+                  </Link>
+                </div>
+              </>
+            )}
 
             <Link
               href="/generate"
