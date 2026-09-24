@@ -214,10 +214,21 @@ function ResultsContent() {
     );
   }
 
-  // Calculate completion percentage
-  const totalTopics = data.modules.reduce((acc, m) => acc + m.topics.length, 0);
-  const completedTopicsCount = Object.keys(completedItems).filter((k) => completedItems[k]).length;
-  const progressPercent = totalTopics > 0 ? Math.round((completedTopicsCount / totalTopics) * 100) : 0;
+  // Calculate completion percentage - strictly count only topics belonging to this roadmap
+  const totalTopics = data.modules.reduce((acc, m) => acc + (m.topics?.length || 0), 0);
+  let completedTopicsCount = 0;
+  data.modules.forEach((mod, mIdx) => {
+    const modOrder = mod.order || mIdx + 1;
+    (mod.topics || []).forEach((_, tIdx) => {
+      const topicKey = `mod-${modOrder}-top-${tIdx}`;
+      if (completedItems[topicKey]) {
+        completedTopicsCount++;
+      }
+    });
+  });
+  const progressPercent = totalTopics > 0
+    ? Math.min(100, Math.round((completedTopicsCount / totalTopics) * 100))
+    : 0;
 
   return (
     <div className="min-h-screen flex flex-col bg-background selection:bg-indigo-500 selection:text-white">
