@@ -22,6 +22,7 @@ import {
   User,
   Settings,
   LogOut,
+  Trophy,
 } from "lucide-react";
 
 export default function DashboardPage() {
@@ -77,6 +78,8 @@ export default function DashboardPage() {
     );
   }
 
+  const [filterTab, setFilterTab] = useState<"all" | "active" | "completed">("all");
+
   const stats = data?.stats || {
     totalSavedPaths: 0,
     totalCompletedTopics: 0,
@@ -85,6 +88,15 @@ export default function DashboardPage() {
   };
 
   const paths = data?.paths || [];
+  const activePaths = paths.filter((p: any) => p.progressPercent < 100);
+  const completedPaths = paths.filter((p: any) => p.progressPercent >= 100);
+
+  const displayedPaths =
+    filterTab === "active"
+      ? activePaths
+      : filterTab === "completed"
+      ? completedPaths
+      : paths;
 
   return (
     <div className="min-h-screen flex flex-col bg-background selection:bg-indigo-500 selection:text-white">
@@ -163,13 +175,57 @@ export default function DashboardPage() {
 
           {/* Enrolled Curricula Section */}
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="font-heading text-xl font-bold text-slate-900 dark:text-white">
-                My Learning Curricula
-              </h2>
-              <span className="text-xs text-slate-500">
-                {paths.length} {paths.length === 1 ? "Path" : "Paths"}
-              </span>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
+              <div>
+                <h2 className="font-heading text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <span>My Learning Curricula</span>
+                  {completedPaths.length > 0 && (
+                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 font-semibold border border-emerald-300 dark:border-emerald-800">
+                      {completedPaths.length} Graduated 🏆
+                    </span>
+                  )}
+                </h2>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Click any curriculum card to view details, test knowledge, and track your score.
+                </p>
+              </div>
+
+              {/* Filter Tabs */}
+              {paths.length > 0 && (
+                <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 self-start sm:self-auto text-xs font-medium">
+                  <button
+                    onClick={() => setFilterTab("all")}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${
+                      filterTab === "all"
+                        ? "bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 font-semibold shadow-xs"
+                        : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                    }`}
+                  >
+                    All Paths ({paths.length})
+                  </button>
+                  <button
+                    onClick={() => setFilterTab("active")}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${
+                      filterTab === "active"
+                        ? "bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 font-semibold shadow-xs"
+                        : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                    }`}
+                  >
+                    In Progress ({activePaths.length})
+                  </button>
+                  <button
+                    onClick={() => setFilterTab("completed")}
+                    className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
+                      filterTab === "completed"
+                        ? "bg-white dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 font-semibold shadow-xs"
+                        : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                    }`}
+                  >
+                    <span>Learning History 🏆</span>
+                    <span className="font-mono">({completedPaths.length})</span>
+                  </button>
+                </div>
+              )}
             </div>
 
             {paths.length === 0 ? (
@@ -187,72 +243,139 @@ export default function DashboardPage() {
                   <span>Generate Your First Path</span>
                 </Link>
               </div>
+            ) : filterTab === "completed" && completedPaths.length === 0 ? (
+              <div className="glass-panel p-10 rounded-3xl border border-dashed border-slate-300 dark:border-slate-800 text-center space-y-4">
+                <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center mx-auto text-amber-500 text-xl">
+                  🏆
+                </div>
+                <h3 className="font-heading text-lg font-bold">No Completed Paths in Learning History Yet</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 max-w-md mx-auto">
+                  Curricula where you complete all topics will automatically graduate here as permanent achievements with a 100% score!
+                </p>
+                <button
+                  onClick={() => setFilterTab("active")}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-semibold text-xs sm:text-sm hover:bg-indigo-500 transition-colors"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  <span>View In-Progress Paths ({activePaths.length})</span>
+                </button>
+              </div>
+            ) : filterTab === "active" && activePaths.length === 0 ? (
+              <div className="glass-panel p-10 rounded-3xl border border-dashed border-slate-300 dark:border-slate-800 text-center space-y-4">
+                <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
+                <h3 className="font-heading text-lg font-bold">All Roadmaps Completed! 🏆</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 max-w-md mx-auto">
+                  Outstanding work! Every roadmap you have created is 100% completed. Ready for your next tech milestone?
+                </p>
+                <Link
+                  href="/generate"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-emerald-500 text-white font-semibold text-xs sm:text-sm hover:from-indigo-500 hover:to-emerald-400 transition-all shadow-md shadow-indigo-500/20"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Forge a New Path</span>
+                </Link>
+              </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {paths.map((p: any) => (
-                  <div
-                    key={p.id}
-                    className="glass-panel p-6 sm:p-7 rounded-3xl border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between space-y-5 hover:border-indigo-500/50 transition-all hover:shadow-lg hover:shadow-indigo-500/5"
-                  >
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
-                          {p.technologies}
-                        </span>
-                        <span className="text-[11px] text-slate-500 font-mono">
-                          {p.hoursPerWeek} hrs/wk • {p.weeks} wks
-                        </span>
-                      </div>
-
-                      <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
-                        {p.title}
-                      </h3>
-
-                      <div className="flex items-center gap-2 text-xs text-slate-500">
-                        <span>Goal: {p.goal}</span>
-                        <span>•</span>
-                        <span>Level: {p.level}</span>
-                      </div>
-
-                      {/* Progress bar */}
-                      <div className="space-y-1.5 pt-2">
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-slate-600 dark:text-slate-400 font-medium">
-                            {p.completedTopics} of {p.totalTopics} Topics
+                {displayedPaths.map((p: any) => {
+                  const isMastered = p.progressPercent >= 100;
+                  return (
+                    <div
+                      key={p.id}
+                      onClick={() => router.push(`/results?id=${p.id}`)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          router.push(`/results?id=${p.id}`);
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Open ${p.title} curriculum`}
+                      className="glass-panel p-6 sm:p-7 rounded-3xl border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between space-y-5 hover:border-indigo-500/60 dark:hover:border-indigo-500/50 transition-all hover:shadow-xl hover:shadow-indigo-500/10 cursor-pointer group hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between gap-2 flex-wrap">
+                          <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                            {p.technologies}
                           </span>
-                          <span className="font-mono font-bold text-indigo-600 dark:text-indigo-400">
-                            {p.progressPercent}%
-                          </span>
+
+                          {/* Score Badge */}
+                          {isMastered ? (
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 text-xs font-bold shadow-xs">
+                              <span>🏆 Score: 100%</span>
+                              <span className="text-[10px] uppercase tracking-wider font-extrabold text-emerald-600 dark:text-emerald-400">Mastered</span>
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 text-xs font-bold">
+                              <span>Score: {p.progressPercent}%</span>
+                              <span className="text-[10px] text-slate-500">In Progress</span>
+                            </span>
+                          )}
                         </div>
-                        <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
-                          <div
-                            className="bg-gradient-to-r from-indigo-500 to-emerald-400 h-full rounded-full transition-all duration-300"
-                            style={{ width: `${p.progressPercent}%` }}
-                          />
+
+                        <div>
+                          <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                            {p.title}
+                          </h3>
+                          <div className="flex items-center gap-2 text-xs text-slate-500 mt-1">
+                            <span>Goal: {p.goal}</span>
+                            <span>•</span>
+                            <span>Level: {p.level}</span>
+                            <span>•</span>
+                            <span className="font-mono">{p.hoursPerWeek} hrs/wk</span>
+                          </div>
+                        </div>
+
+                        {/* Progress bar and Score stats */}
+                        <div className="space-y-1.5 pt-2">
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="text-slate-600 dark:text-slate-400 font-medium">
+                              {p.completedTopics} of {p.totalTopics} Topics
+                            </span>
+                            <span
+                              className={`font-mono font-bold ${
+                                isMastered
+                                  ? "text-emerald-600 dark:text-emerald-400"
+                                  : "text-indigo-600 dark:text-indigo-400"
+                              }`}
+                            >
+                              {p.progressPercent}%
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                            <div
+                              className={`h-full rounded-full transition-all duration-500 ${
+                                isMastered
+                                  ? "bg-gradient-to-r from-emerald-500 to-teal-400"
+                                  : "bg-gradient-to-r from-indigo-500 to-emerald-400"
+                              }`}
+                              style={{ width: `${Math.max(4, p.progressPercent)}%` }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
+                        <a
+                          href={`/share/${p.shareId || p.id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-xs text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center gap-1.5 transition-colors p-1"
+                        >
+                          <Share2 className="w-3.5 h-3.5" />
+                          <span>Public Link</span>
+                        </a>
+
+                        <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 group-hover:bg-indigo-500 text-white text-xs font-semibold shadow-xs transition-colors">
+                          <span>{isMastered ? "Review History 🏆" : "Resume Learning"}</span>
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                         </div>
                       </div>
                     </div>
-
-                    <div className="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-                      <Link
-                        href={`/share/${p.shareId || p.id}`}
-                        target="_blank"
-                        className="text-xs text-slate-500 hover:text-indigo-600 flex items-center gap-1"
-                      >
-                        <Share2 className="w-3.5 h-3.5" />
-                        <span>Public Link</span>
-                      </Link>
-
-                      <Link
-                        href={`/results?id=${p.id}`}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-xs transition-colors"
-                      >
-                        <span>Resume Learning</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
