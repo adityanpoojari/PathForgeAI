@@ -103,27 +103,13 @@ export default function DashboardPage() {
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
-              <Link
-                href="/settings"
-                className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold flex items-center gap-1.5 transition-colors"
-              >
-                <Settings className="w-3.5 h-3.5 text-slate-500" />
-                <span>Settings</span>
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-rose-50 dark:hover:bg-rose-950/40 hover:text-rose-600 text-xs font-semibold flex items-center gap-1.5 transition-colors"
-              >
-                <LogOut className="w-3.5 h-3.5" />
-                <span>Sign Out</span>
-              </button>
+            <div>
               <Link
                 href="/generate"
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-emerald-500 hover:from-indigo-500 hover:to-emerald-400 text-white text-xs sm:text-sm font-semibold shadow-md flex items-center gap-1.5 transition-all"
+                className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-500 hover:from-indigo-500 hover:to-emerald-400 text-white text-xs sm:text-sm font-semibold shadow-md shadow-indigo-500/20 flex items-center gap-2 transition-all hover:scale-[1.02]"
               >
                 <Plus className="w-4 h-4" />
-                <span>New Path</span>
+                <span>Create New Path</span>
               </Link>
             </div>
           </div>
