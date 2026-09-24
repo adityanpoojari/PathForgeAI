@@ -1,0 +1,288 @@
+{
+  "overview": "A high-impact curriculum designed for Data Scientists and Engineers, mastering Python from core language constructs and functional paradigms to NumPy vectorized computations, Pandas data wrangling, Scikit-Learn machine learning pipelines, and end-to-end model deployments.",
+  "technology": "Python",
+  "level": "Intermediate",
+  "goal": "Data Scientist",
+  "prerequisites": [
+    "Basic programming logic in any language",
+    "Fundamental algebra, matrix operations, and statistics concepts",
+    "Familiarity with basic terminal commands"
+  ],
+  "modules": [
+    {
+      "order": 1,
+      "title": "Advanced Python & Scientific Computing Foundations",
+      "estimatedHours": 16,
+      "topics": [
+        {
+          "title": "Pythonic Idioms, Comprehensions & Generators",
+          "description": "List/dict/set comprehensions, generator functions with yield, memory profiling, and context managers (with statement).",
+          "resources": [
+            { "label": "Python Official Documentation", "type": "docs", "searchQuery": "Python 3 documentation data structures and generators" },
+            { "label": "Pythonic Code Best Practices", "type": "article", "searchQuery": "Fluent Python generators and iterators guide" }
+          ]
+        },
+        {
+          "title": "NumPy Vectorization & N-Dimensional Arrays",
+          "description": "Broadcasting rules, multidimensional slicing, vector operations vs slow for-loops, and linear algebra routines.",
+          "resources": [
+            { "label": "NumPy User Guide", "type": "docs", "searchQuery": "NumPy user guide array broadcasting" }
+          ]
+        },
+        {
+          "title": "Pandas Data Wrangling & Time Series",
+          "description": "DataFrame manipulations, handling missing values, groupby aggregations, pivot tables, and datetime index resampling.",
+          "resources": [
+            { "label": "Pandas 10-Minute Walkthrough", "type": "docs", "searchQuery": "Pandas 10 minutes to pandas documentation" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Exploratory Data Analysis & Statistical Modeling",
+      "estimatedHours": 20,
+      "topics": [
+        {
+          "title": "Data Visualization (Matplotlib, Seaborn & Plotly)",
+          "description": "Distribution plots, correlation heatmaps, interactive charts, and publication-ready visual storytelling.",
+          "resources": [
+            { "label": "Seaborn Tutorial Gallery", "type": "docs", "searchQuery": "Seaborn tutorial statistical data visualization" }
+          ]
+        },
+        {
+          "title": "Applied Statistics & Hypothesis Testing",
+          "description": "Central limit theorem, p-values, t-tests, ANOVA, Chi-Square tests, and A/B test power analysis with SciPy.",
+          "resources": [
+            { "label": "SciPy Statistical Functions", "type": "docs", "searchQuery": "SciPy stats hypothesis testing t-test" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Supervised & Unsupervised Machine Learning",
+      "estimatedHours": 24,
+      "topics": [
+        {
+          "title": "Feature Engineering & Scikit-Learn Pipelines",
+          "description": "StandardScaler, OneHotEncoder, Imputer, custom Transformers, and building leak-proof scikit-learn Pipelines.",
+          "resources": [
+            { "label": "Scikit-Learn Pipelines Documentation", "type": "docs", "searchQuery": "Scikit-learn composite estimators and pipelines" }
+          ]
+        },
+        {
+          "title": "Classification, Regression & Ensemble Algorithms",
+          "description": "Logistic regression, Random Forests, Gradient Boosted Trees (XGBoost / LightGBM), and hyperparameter tuning with GridSearchCV.",
+          "resources": [
+            { "label": "XGBoost Documentation", "type": "docs", "searchQuery": "XGBoost parameters tuning guide" }
+          ]
+        },
+        {
+          "title": "Clustering & Dimensionality Reduction",
+          "description": "K-Means, DBSCAN density clustering, PCA (Principal Component Analysis), and t-SNE / UMAP for high-dimensional data.",
+          "resources": [
+            { "label": "Scikit-Learn Unsupervised Learning", "type": "docs", "searchQuery": "Scikit-learn clustering PCA tutorial" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Model Evaluation, MLOps & Production APIs",
+      "estimatedHours": 20,
+      "topics": [
+        {
+          "title": "Rigorous Evaluation Metrics & Bias-Variance Tradeoff",
+          "description": "ROC-AUC, Precision-Recall curves, F1-score, cross-validation strategies, confusion matrices, and detecting data drift.",
+          "resources": [
+            { "label": "Model Evaluation Metrics Guide", "type": "article", "searchQuery": "Precision Recall ROC AUC metrics guide" }
+          ]
+        },
+        {
+          "title": "FastAPI Model Serving & Dockerization",
+          "description": "Serializing models with Joblib/ONNX, serving real-time predictions with FastAPI, and packaging into minimal Docker containers.",
+          "resources": [
+            { "label": "FastAPI Deployment Guide", "type": "docs", "searchQuery": "FastAPI machine learning model deployment tutorial" }
+          ]
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Exploratory Housing Market Analysis Dashboard",
+      "difficulty": "beginner",
+      "description": "Ingest real estate datasets, clean missing and inconsistent values, engineer price-per-square-foot features, and output automated visual summaries.",
+      "skills": ["Pandas", "Matplotlib", "Seaborn", "Jupyter"],
+      "features": [
+        "Automated null-value imputation and outlier detection",
+        "Interactive correlation heatmaps and geographic scatter plots",
+        "Key takeaways summary report exported to Markdown"
+      ],
+      "stretchGoals": [
+        "Build an interactive Streamlit web dashboard",
+        "Add automated PDF export of findings"
+      ]
+    },
+    {
+      "title": "Customer Churn Prediction Pipeline",
+      "difficulty": "intermediate",
+      "description": "Build an end-to-end classification system predicting subscriber churn for a subscription telecom service with full preprocessing pipelines.",
+      "skills": ["Scikit-Learn", "XGBoost", "Feature Engineering", "ROC-AUC"],
+      "features": [
+        "Leakage-free Scikit-Learn transformation pipeline",
+        "Model comparison across Logistic Regression, Random Forest, and XGBoost",
+        "Feature importance visualization with SHAP values"
+      ],
+      "stretchGoals": [
+        "Optimize hyper-parameters using Bayesian optimization (Optuna)",
+        "Address class imbalance using SMOTE"
+      ]
+    },
+    {
+      "title": "Real-Time Fraud Detection REST API",
+      "difficulty": "advanced",
+      "description": "A low-latency FastAPI inference service predicting transaction fraud risk with sub-50ms latency and Pydantic schema validation.",
+      "skills": ["FastAPI", "Docker", "Joblib", "Model Serving"],
+      "features": [
+        "POST /predict endpoint accepting JSON transaction features",
+        "Real-time scoring and classification with confidence probability",
+        "Structured logging of prediction latency and inference requests"
+      ],
+      "stretchGoals": [
+        "Containerize with Docker and write health-check endpoints",
+        "Implement a Redis caching layer for frequent queries"
+      ]
+    },
+    {
+      "title": "Autonomous Predictive Maintenance Platform",
+      "difficulty": "capstone",
+      "description": "An end-to-end industrial IoT telemetry platform analyzing sensor time-series data to predict equipment failure before catastrophic downtime occurs.",
+      "skills": ["Time-Series", "PyTorch / Scikit-Learn", "FastAPI", "Docker", "MLflow"],
+      "features": [
+        "Time-series rolling statistics and lag feature creation",
+        "Experiment tracking with MLflow tracking parameters and metrics",
+        "Production inference service with automated drift alert triggers"
+      ],
+      "stretchGoals": [
+        "Deploy container to AWS ECS or Render",
+        "Add Grafana telemetry dashboard"
+      ]
+    }
+  ],
+  "practiceProblems": [
+    {
+      "title": "Vectorized Matrix Multiplication & Broadcasting",
+      "difficulty": "easy",
+      "topic": "NumPy",
+      "hint": "Use np.newaxis or reshape to align array dimensions for broadcasting without manual loops."
+    },
+    {
+      "title": "Custom Scikit-Learn Transformer for Outlier Clipping",
+      "difficulty": "medium",
+      "topic": "Feature Engineering",
+      "hint": "Subclass BaseEstimator and TransformerMixin, implement fit() to calculate quantiles, and transform() to clip values."
+    },
+    {
+      "title": "Stratified K-Fold Cross-Validation on Imbalanced Dataset",
+      "difficulty": "medium",
+      "topic": "Model Evaluation",
+      "hint": "Use StratifiedKFold from sklearn.model_selection to preserve minority class percentage in each fold."
+    },
+    {
+      "title": "Streaming Log Anomaly Detection with Isolation Forests",
+      "difficulty": "hard",
+      "topic": "Unsupervised ML",
+      "hint": "Train an IsolationForest model on normal telemetry vectors and flag data points with negative decision function scores."
+    }
+  ],
+  "interviewQuestions": [
+    {
+      "question": "What is the difference between Python's list and NumPy's ndarray?",
+      "answer": "Python lists are collections of references to arbitrary heap objects, resulting in memory fragmentation and pointer chasing. NumPy ndarrays store homogeneous data in contiguous memory blocks, enabling SIMD vectorization, cache locality, and C-speed operations.",
+      "difficulty": "Beginner",
+      "topic": "Data Structures"
+    },
+    {
+      "question": "Explain the Bias-Variance tradeoff and how ensemble methods help.",
+      "answer": "High bias leads to underfitting (model too simplistic), while high variance leads to overfitting (model learns training noise). Bagging (e.g. Random Forest) reduces variance by averaging predictions of uncorrelated deep decision trees. Boosting (e.g. XGBoost) reduces bias by sequentially training weak learners to correct previous errors.",
+      "difficulty": "Intermediate",
+      "topic": "Machine Learning"
+    },
+    {
+      "question": "Why is Precision-Recall curve preferred over ROC-AUC on imbalanced datasets?",
+      "answer": "ROC curves plot True Positive Rate against False Positive Rate. When the negative class is massive, a large absolute number of false positives produces only a tiny change in FPR (FP / (FP + TN)), giving an overly optimistic picture. Precision-Recall curves focus strictly on the minority positive class without being diluted by true negatives.",
+      "difficulty": "Intermediate",
+      "topic": "Model Evaluation"
+    },
+    {
+      "question": "What is data leakage and how do you prevent it in production ML pipelines?",
+      "answer": "Data leakage occurs when information from outside the training dataset (such as target values or test set statistics like mean/std) unintentionally influences model training. Prevent it by applying transformations strictly inside cross-validation loops or Scikit-Learn Pipelines fitted solely on training splits.",
+      "difficulty": "Advanced",
+      "topic": "MLOps & Engineering"
+    }
+  ],
+  "weeklySchedule": [
+    {
+      "week": 1,
+      "focus": "Advanced Python, Iterators & NumPy Vectorization",
+      "tasks": [
+        "Review list comprehensions, generators, and decorators",
+        "Master NumPy array indexing, slicing, and broadcasting",
+        "Complete 5 array manipulation coding challenges"
+      ],
+      "hours": 12
+    },
+    {
+      "week": 2,
+      "focus": "Data Wrangling with Pandas & EDA",
+      "tasks": [
+        "Clean messy CSV datasets with Pandas missing value imputation",
+        "Perform groupby aggregations and pivot table summaries",
+        "Build exploratory housing market visualizations with Seaborn"
+      ],
+      "hours": 12
+    },
+    {
+      "week": 3,
+      "focus": "Statistical Testing & Feature Engineering",
+      "tasks": [
+        "Conduct two-sample t-tests and correlation significance tests",
+        "Build Scikit-Learn Transformers and Pipelines",
+        "Begin Customer Churn Prediction project"
+      ],
+      "hours": 12
+    },
+    {
+      "week": 4,
+      "focus": "Supervised Learning & Model Tuning",
+      "tasks": [
+        "Train Logistic Regression, Random Forests, and XGBoost models",
+        "Optimize hyper-parameters with cross-validated grid search",
+        "Evaluate using ROC-AUC, Precision, and Recall matrices"
+      ],
+      "hours": 12
+    },
+    {
+      "week": 5,
+      "focus": "FastAPI Model Serving & Docker Containerization",
+      "tasks": [
+        "Serialize top-performing model with Joblib",
+        "Create FastAPI app with input validation schemas",
+        "Containerize the microservice with Dockerfile"
+      ],
+      "hours": 12
+    },
+    {
+      "week": 6,
+      "focus": "Capstone Project & Data Science Interview Drills",
+      "tasks": [
+        "Finalize and document Capstone Platform with GitHub repo",
+        "Practice explaining ML tradeoffs and mathematical foundations",
+        "Mock interview review with technical questions"
+      ],
+      "hours": 12
+    }
+  ]
+}

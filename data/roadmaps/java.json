@@ -1,0 +1,303 @@
+{
+  "overview": "A comprehensive, industry-proven curriculum mastering Java from syntax foundations and Object-Oriented Principles through Collections, Multithreading, JVM internals, and modern Spring Boot enterprise architectures for Software Developers.",
+  "technology": "Java",
+  "level": "Beginner",
+  "goal": "Software Developer",
+  "prerequisites": [
+    "Basic computer literacy",
+    "Understanding of command line basics",
+    "Familiarity with logic and problem solving"
+  ],
+  "modules": [
+    {
+      "order": 1,
+      "title": "Java Fundamentals & Syntax",
+      "estimatedHours": 18,
+      "topics": [
+        {
+          "title": "JVM, JRE, JDK & Development Setup",
+          "description": "Understanding Java compilation bytecode, JVM execution lifecycle, and configuring IntelliJ IDEA with modern JDK 21+.",
+          "resources": [
+            { "label": "Oracle Official Java Documentation", "type": "docs", "searchQuery": "Oracle Java SE 21 Documentation getting started" },
+            { "label": "Java Crash Course for Beginners", "type": "video", "searchQuery": "Java tutorial for beginners full course" }
+          ]
+        },
+        {
+          "title": "Variables, Data Types & Control Structures",
+          "description": "Primitive types, reference types, type casting, ternary operators, loops (for, while, do-while), and modern switch expressions.",
+          "resources": [
+            { "label": "Java Control Flow Statements", "type": "docs", "searchQuery": "Java control flow statements if switch while" },
+            { "label": "Conditionals and Loops Practice", "type": "practice", "searchQuery": "Java basics coding exercises loops arrays" }
+          ]
+        },
+        {
+          "title": "Arrays, Strings & Immutability",
+          "description": "Single and multidimensional arrays, String Pool mechanics, StringBuilder vs StringBuffer performance optimization.",
+          "resources": [
+            { "label": "Java String Pool Deep Dive", "type": "article", "searchQuery": "Java String Pool memory management guide" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Object-Oriented Programming (OOP) Deep Dive",
+      "estimatedHours": 24,
+      "topics": [
+        {
+          "title": "Encapsulation & Access Modifiers",
+          "description": "Constructors, getters/setters, class vs object scoping, packages, and access modifiers (public, protected, package-private, private).",
+          "resources": [
+            { "label": "Classes and Objects Guide", "type": "docs", "searchQuery": "Oracle Java classes and objects tutorial" }
+          ]
+        },
+        {
+          "title": "Inheritance, Polymorphism & Abstract Classes",
+          "description": "Method overriding vs overloading, dynamic dispatch, super keyword, and designing class hierarchies.",
+          "resources": [
+            { "label": "Polymorphism Explained", "type": "video", "searchQuery": "Java polymorphism and inheritance explained clearly" }
+          ]
+        },
+        {
+          "title": "Interfaces, Sealed Classes & Records",
+          "description": "Interface default/static methods, functional interfaces, sealed classes hierarchy enforcement, and modern immutable Java Records.",
+          "resources": [
+            { "label": "Java Records and Sealed Interfaces", "type": "docs", "searchQuery": "Java 17 records sealed classes tutorial" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Java Collections Framework & Generics",
+      "estimatedHours": 22,
+      "topics": [
+        {
+          "title": "Generics & Type Erasure",
+          "description": "Generic classes, bounded type parameters, wildcard types (? extends, ? super), and runtime type erasure implications.",
+          "resources": [
+            { "label": "Generics in Java Documentation", "type": "docs", "searchQuery": "Java Generics tutorial Oracle" }
+          ]
+        },
+        {
+          "title": "List, Set, Map & Queue Implementations",
+          "description": "ArrayList vs LinkedList, HashSet & HashMap bucket collisions, TreeMap, and PriorityQueue internal mechanics.",
+          "resources": [
+            { "label": "HashMap Internal Working", "type": "article", "searchQuery": "How HashMap works internally in Java Baeldung" }
+          ]
+        },
+        {
+          "title": "Java Streams API & Lambdas",
+          "description": "Functional programming in Java, intermediate operations (filter, map, flatMap), terminal collectors, and lazy evaluation.",
+          "resources": [
+            { "label": "Java Streams Cheatsheet", "type": "docs", "searchQuery": "Java 8 Streams API tutorial examples" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Exception Handling, Concurrency & Modern Backend",
+      "estimatedHours": 26,
+      "topics": [
+        {
+          "title": "Exception Hierarchy & Try-With-Resources",
+          "description": "Checked vs unchecked exceptions, custom exception classes, AutoCloseable, and robust error management.",
+          "resources": [
+            { "label": "Java Exception Best Practices", "type": "article", "searchQuery": "Java exception handling best practices" }
+          ]
+        },
+        {
+          "title": "Multithreading & Virtual Threads (Project Loom)",
+          "description": "Thread lifecycles, synchronized blocks, locks, ExecutorService, and lightweight Virtual Threads in modern Java.",
+          "resources": [
+            { "label": "Virtual Threads Deep Dive", "type": "docs", "searchQuery": "Java 21 virtual threads guide Loom" }
+          ]
+        },
+        {
+          "title": "REST APIs with Spring Boot Foundations",
+          "description": "Building production REST services with Spring Web, Dependency Injection, JPA repository persistence, and validation.",
+          "resources": [
+            { "label": "Building a RESTful Web Service", "type": "docs", "searchQuery": "Spring Boot building RESTful Web Service guide" }
+          ]
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Student Management Console Application",
+      "difficulty": "beginner",
+      "description": "An interactive CLI tool for university administrative staff to track course registrations, grades, and GPA calculations.",
+      "skills": ["OOP", "Arrays & Collections", "File I/O", "CLI Menus"],
+      "features": [
+        "CRUD operations for student profiles and grades",
+        "Persistent text file or JSON storage of records",
+        "Search and filter students by department and minimum GPA"
+      ],
+      "stretchGoals": [
+        "Add sorting with custom Comparators",
+        "Implement export to CSV functionality"
+      ]
+    },
+    {
+      "title": "Banking & Transaction Engine",
+      "difficulty": "intermediate",
+      "description": "A robust financial ledger simulator handling simultaneous multi-account transfers with transactional integrity and audit trails.",
+      "skills": ["Concurrency", "Thread Safety", "Collections", "Exception Handling"],
+      "features": [
+        "Concurrent deposit, withdrawal, and transfer between accounts",
+        "ReentrantLock protection to avoid race conditions and deadlocks",
+        "Detailed transaction history log with timestamps"
+      ],
+      "stretchGoals": [
+        "Simulate high load with 100 parallel worker threads",
+        "Introduce overdraft protection rules and fee calculations"
+      ]
+    },
+    {
+      "title": "E-Commerce REST API Microservice",
+      "difficulty": "advanced",
+      "description": "A production-grade product catalog and checkout service built on Spring Boot 3, connected to PostgreSQL.",
+      "skills": ["Spring Boot", "Spring Data JPA", "PostgreSQL", "DTO Pattern", "Validation"],
+      "features": [
+        "Paginated and filtered product listing API",
+        "Shopping cart management and order placement",
+        "Global exception handling with standard error response envelope"
+      ],
+      "stretchGoals": [
+        "Dockerize the application and database",
+        "Add Swagger / OpenAPI interactive documentation"
+      ]
+    },
+    {
+      "title": "Distributed Task Scheduler & Job Engine",
+      "difficulty": "capstone",
+      "description": "An enterprise asynchronous job processing engine with worker pools, scheduled cron execution, and resilient retry queues.",
+      "skills": ["Virtual Threads", "Spring Boot", "Docker", "Database Locks", "Unit Testing"],
+      "features": [
+        "API to register one-off and recurring cron jobs",
+        "Resilient execution with exponential backoff on failure",
+        "Live dashboard endpoint reporting queue depths and worker metrics"
+      ],
+      "stretchGoals": [
+        "Add JWT authentication for administrative job scheduling",
+        "Benchmark throughput comparing OS threads vs Virtual Threads"
+      ]
+    }
+  ],
+  "practiceProblems": [
+    {
+      "title": "Two Sum with HashMap",
+      "difficulty": "easy",
+      "topic": "Collections & Hashing",
+      "hint": "Store the complement of each number in a HashMap to achieve an O(n) single pass time complexity."
+    },
+    {
+      "title": "Custom Generic Stack Implementation",
+      "difficulty": "medium",
+      "topic": "Generics & Data Structures",
+      "hint": "Use a dynamic array backing store and handle array resizing when capacity reaches the threshold."
+    },
+    {
+      "title": "LRU Cache using LinkedHashMap or Deque",
+      "difficulty": "medium",
+      "topic": "Collections & Design",
+      "hint": "Override removeEldestEntry in LinkedHashMap or pair a doubly-linked list with a HashMap."
+    },
+    {
+      "title": "Thread-Safe Producer-Consumer Queue",
+      "difficulty": "hard",
+      "topic": "Concurrency",
+      "hint": "Use wait() and notifyAll() inside synchronized blocks, or utilize java.util.concurrent.ArrayBlockingQueue."
+    }
+  ],
+  "interviewQuestions": [
+    {
+      "question": "What is the difference between JVM, JRE, and JDK?",
+      "answer": "JDK (Java Development Kit) contains tools needed to develop Java programs including javac compiler. JRE (Java Runtime Environment) provides libraries and JVM to execute programs. JVM (Java Virtual Machine) executes compiled bytecode, managing memory allocation, garbage collection, and platform independence.",
+      "difficulty": "Beginner",
+      "topic": "Java Architecture"
+    },
+    {
+      "question": "Why is the String class immutable in Java?",
+      "answer": "String immutability provides security (safe for database URLs and passwords), thread safety (multiple threads can read without synchronization), caching efficiency (allows the String Constant Pool to save memory), and hash code stability (cached hashCode for HashMap keys).",
+      "difficulty": "Intermediate",
+      "topic": "Core Java"
+    },
+    {
+      "question": "How does HashMap handle collisions in Java 8+?",
+      "answer": "HashMap uses an array of buckets. When two keys hash to the same bucket index, they form a linked list. Once a single bucket reaches a threshold (TREEIFY_THRESHOLD = 8) and total table capacity is at least 64, the linked list transforms into a balanced red-black tree, reducing lookup time from O(n) to O(log n).",
+      "difficulty": "Intermediate",
+      "topic": "Collections"
+    },
+    {
+      "question": "What are Virtual Threads in Java 21, and how do they differ from Platform Threads?",
+      "answer": "Platform threads are 1:1 wrappers around OS threads with ~1MB memory overhead and expensive context switching. Virtual threads are user-mode threads managed by the JVM with tiny memory footprints (~few hundred bytes). When a virtual thread performs blocking I/O, the JVM unmounts it from the carrier OS thread, enabling millions of concurrent connections on standard hardware.",
+      "difficulty": "Advanced",
+      "topic": "Concurrency & Modern Java"
+    }
+  ],
+  "weeklySchedule": [
+    {
+      "week": 1,
+      "focus": "Java Syntax, CLI Setup & Basic Control Flow",
+      "tasks": [
+        "Install JDK 21 and configure IntelliJ IDEA or VS Code",
+        "Write first Java classes, explore primitives, arrays and loops",
+        "Complete 5 basic coding challenges on loops and logic"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 2,
+      "focus": "Object-Oriented Programming (OOP) Essentials",
+      "tasks": [
+        "Implement classes with encapsulation and constructors",
+        "Build inheritance trees and experiment with method overriding",
+        "Start Beginner Project: Student Management Console App"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 3,
+      "focus": "Collections Framework & Data Structures",
+      "tasks": [
+        "Master ArrayList, HashMap, and HashSet with practical exercises",
+        "Refactor Student App to use Collections and file persistence",
+        "Solve 3 practice problems on Map and List manipulation"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 4,
+      "focus": "Modern Streams, Lambdas & Concurrency Basics",
+      "tasks": [
+        "Rewrite collection filtering and transformations using Java Streams",
+        "Understand threads, Runnable, and ExecutorService",
+        "Build the Banking Ledger simulation project"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 5,
+      "focus": "Spring Boot REST APIs & Database Persistence",
+      "tasks": [
+        "Initialize Spring Boot project with Spring Initializr",
+        "Create REST controllers, service layers, and DTOs",
+        "Connect H2 or PostgreSQL with Spring Data JPA entities"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 6,
+      "focus": "Capstone Project & Interview Prep",
+      "tasks": [
+        "Complete and polish E-Commerce REST API or Task Scheduler",
+        "Write JUnit 5 test cases and verify edge cases",
+        "Review Java interview flashcards and technical questions"
+      ],
+      "hours": 10
+    }
+  ]
+}

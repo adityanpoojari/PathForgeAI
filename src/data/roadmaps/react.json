@@ -1,0 +1,296 @@
+{
+  "overview": "A contemporary, production-oriented curriculum taking engineers from core React declarative fundamentals and state management to Next.js App Router, SSR, Server Actions, TypeScript type safety, and polished UI component architectures.",
+  "technology": "React",
+  "level": "Beginner",
+  "goal": "Frontend Developer",
+  "prerequisites": [
+    "HTML5 semantic markup and CSS3 layout (Flexbox/Grid)",
+    "Modern JavaScript (ES6+): arrow functions, destructuring, promises, async/await",
+    "Basic command line and npm package management"
+  ],
+  "modules": [
+    {
+      "order": 1,
+      "title": "React Declarative Foundations & Component Thinking",
+      "estimatedHours": 18,
+      "topics": [
+        {
+          "title": "JSX, Virtual DOM & Component Architecture",
+          "description": "Understanding JSX compilation, declarative UI principles, pure components, and reconciliation diffing algorithms.",
+          "resources": [
+            { "label": "Describing the UI - React.dev", "type": "docs", "searchQuery": "React dev describing the UI quick start" },
+            { "label": "React Complete Beginner Guide", "type": "video", "searchQuery": "React JS full course beginners tutorial" }
+          ]
+        },
+        {
+          "title": "Props, State & Component Lifecycle with Hooks",
+          "description": "State as a snapshot, useState for interactive updates, lifting state up, and the useEffect dependency array lifecycle.",
+          "resources": [
+            { "label": "State: A Component's Memory", "type": "docs", "searchQuery": "React dev state a components memory" },
+            { "label": "Interactive Hooks Exercises", "type": "practice", "searchQuery": "React hooks exercises useState useEffect" }
+          ]
+        },
+        {
+          "title": "Rendering Lists & Handling User Events",
+          "description": "Keys in dynamic list rendering, synthetic events, event bubbling, and controlled form inputs.",
+          "resources": [
+            { "label": "Rendering Lists in React", "type": "docs", "searchQuery": "React dev rendering lists keys" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Advanced Hooks, Performance & State Management",
+      "estimatedHours": 22,
+      "topics": [
+        {
+          "title": "useReducer, useContext & Custom Hooks",
+          "description": "Decoupling complex state transitions with reducers, global state propagation with context, and reusable custom hook extraction.",
+          "resources": [
+            { "label": "Extracting Custom Hooks", "type": "docs", "searchQuery": "React dev extracting your own custom hooks" }
+          ]
+        },
+        {
+          "title": "Performance Optimization: useMemo, useCallback & React.memo",
+          "description": "Preventing unnecessary re-renders, referential equality, profiler analysis, and when to avoid premature optimization.",
+          "resources": [
+            { "label": "React Performance Optimization Guide", "type": "article", "searchQuery": "React useMemo useCallback guide performance" }
+          ]
+        },
+        {
+          "title": "Zustand & TanStack Query (React Query)",
+          "description": "Lightweight client state with Zustand and declarative server state synchronization, caching, and optimistic mutations with TanStack Query.",
+          "resources": [
+            { "label": "TanStack Query Overview", "type": "docs", "searchQuery": "TanStack Query overview quickstart React" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Next.js App Router, SSR & Modern Ecosystem",
+      "estimatedHours": 24,
+      "topics": [
+        {
+          "title": "React Server Components (RSC) vs Client Components",
+          "description": "Understanding the server-client boundary, 'use client' directives, zero-bundle-size server components, and streaming with Suspense.",
+          "resources": [
+            { "label": "Next.js Server Components Guide", "type": "docs", "searchQuery": "Next.js App Router Server Components documentation" }
+          ]
+        },
+        {
+          "title": "Routing, Layouts, and Data Mutations (Server Actions)",
+          "description": "Nested layouts, parallel routes, intercepting routes, dynamic segments, and mutating database records securely with Server Actions.",
+          "resources": [
+            { "label": "Next.js Server Actions", "type": "docs", "searchQuery": "Next.js Server Actions forms mutations" }
+          ]
+        },
+        {
+          "title": "Styling with Tailwind CSS & shadcn/ui",
+          "description": "Utility-first design systems, headless accessible primitives (Radix UI), dark mode switching, and Framer Motion micro-interactions.",
+          "resources": [
+            { "label": "Tailwind CSS Docs", "type": "docs", "searchQuery": "Tailwind CSS installation and core concepts" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Testing, Accessibility & Production Deployment",
+      "estimatedHours": 18,
+      "topics": [
+        {
+          "title": "Automated Testing with Vitest & React Testing Library",
+          "description": "Testing user interactions from the user's perspective, mocking network calls, and snapshot tests.",
+          "resources": [
+            { "label": "React Testing Library Guiding Principles", "type": "docs", "searchQuery": "React Testing Library introduction and queries" }
+          ]
+        },
+        {
+          "title": "Web Accessibility (a11y) & Core Web Vitals",
+          "description": "ARIA attributes, keyboard navigation, focus management, LCP/FID/CLS optimization, and Lighthouse audits.",
+          "resources": [
+            { "label": "Web Accessibility Fundamentals", "type": "article", "searchQuery": "React web accessibility WCAG AA best practices" }
+          ]
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Interactive Task & Habit Tracker",
+      "difficulty": "beginner",
+      "description": "A productivity dashboard with daily streaks, category tags, local storage persistence, and smooth status animations.",
+      "skills": ["React Hooks", "Local Storage", "Tailwind CSS", "Forms"],
+      "features": [
+        "Create, toggle, filter, and delete tasks",
+        "Streak calculation with visual confetti on completion",
+        "Filter by priority and completed status"
+      ],
+      "stretchGoals": [
+        "Add drag-and-drop reordering with dnd-kit",
+        "Export and import data in JSON format"
+      ]
+    },
+    {
+      "title": "GitHub Developer Explorer & Analytics",
+      "difficulty": "intermediate",
+      "description": "Search any developer profile to render repository stars, language breakdowns, and contribution activity with TanStack Query caching.",
+      "skills": ["TanStack Query", "REST API", "Lucide Icons", "Skeleton Loaders"],
+      "features": [
+        "Debounced username search with instant API responses",
+        "Visual pie chart of languages used across top repos",
+        "Graceful handling of rate limits and 404 user profiles"
+      ],
+      "stretchGoals": [
+        "Bookmark favorite repositories in local state",
+        "Add dark/light theme toggle"
+      ]
+    },
+    {
+      "title": "Full-Featured Collaborative Kanban Board",
+      "difficulty": "advanced",
+      "description": "A Trello-style multi-column project board with drag-and-drop, optimistic updates, and instant card editing.",
+      "skills": ["Zustand", "dnd-kit / Framer Motion", "TypeScript", "Optimistic UI"],
+      "features": [
+        "Multi-column swimlanes (To Do, In Progress, Code Review, Done)",
+        "Drag items between columns with fluid layout animations",
+        "Tagging, due dates, and checklist items inside task modals"
+      ],
+      "stretchGoals": [
+        "Persist board states via backend API",
+        "Add keyboard shortcuts (Ctrl+N for new card, / to search)"
+      ]
+    },
+    {
+      "title": "Full-Stack SaaS Platform with Next.js & Server Actions",
+      "difficulty": "capstone",
+      "description": "A production-grade web application featuring authentication, subscription tiers, dynamic dashboard analytics, and SEO metadata.",
+      "skills": ["Next.js App Router", "Server Actions", "PostgreSQL / Prisma", "Tailwind", "NextAuth"],
+      "features": [
+        "User registration and session management with NextAuth",
+        "Server-rendered dashboard pages with sub-second LCP",
+        "Interactive analytics graphs and settings panel"
+      ],
+      "stretchGoals": [
+        "Deploy to Vercel with automated CI/CD checks",
+        "Achieve 95+ score on Google Lighthouse audit"
+      ]
+    }
+  ],
+  "practiceProblems": [
+    {
+      "title": "Debounced Search Input Custom Hook",
+      "difficulty": "easy",
+      "topic": "Custom Hooks",
+      "hint": "Use useEffect with a setTimeout timer that clears in the cleanup return function."
+    },
+    {
+      "title": "Compound Component Tabs Pattern",
+      "difficulty": "medium",
+      "topic": "Advanced React Patterns",
+      "hint": "Create a TabsContext and export Tabs, TabsList, TabsTrigger, and TabsContent components sharing state."
+    },
+    {
+      "title": "Virtual List Scroller for 10,000 Elements",
+      "difficulty": "medium",
+      "topic": "Performance",
+      "hint": "Only render items visible within the viewport scroll offset window plus a small buffer."
+    },
+    {
+      "title": "Multi-Step Form with Schema Validation & Draft Recovery",
+      "difficulty": "hard",
+      "topic": "State Management & Zod",
+      "hint": "Combine useReducer or React Hook Form with Zod schema resolution and persist drafts in sessionStorage."
+    }
+  ],
+  "interviewQuestions": [
+    {
+      "question": "What is the difference between React Server Components (RSC) and Client Components?",
+      "answer": "React Server Components execute strictly on the server during build or request time, can directly access databases/filesystems, and add 0kb of JavaScript to the client bundle. Client Components (declared with 'use client') execute on both server (for initial HTML) and browser, enabling browser APIs, event listeners (onClick), and hooks (useState, useEffect).",
+      "difficulty": "Intermediate",
+      "topic": "Next.js & React 18+"
+    },
+    {
+      "question": "How does React's Reconciliation and Virtual DOM algorithm work?",
+      "answer": "When state changes, React constructs a new virtual DOM tree and compares it to the previous tree using a heuristic O(n) diffing algorithm. Elements of different types produce entirely new trees; keys uniquely identify list items across renders to prevent unnecessary re-mounting and preserve DOM state.",
+      "difficulty": "Beginner",
+      "topic": "Core React"
+    },
+    {
+      "question": "When should you use useCallback versus useMemo?",
+      "answer": "useMemo caches the result of an expensive calculation between renders. useCallback caches a callback function instance between renders, useful when passing callbacks to memoized child components (React.memo) or as dependencies in useEffect to prevent infinite loops.",
+      "difficulty": "Intermediate",
+      "topic": "Performance Hooks"
+    },
+    {
+      "question": "What causes the 'Hydration failed' error in SSR applications?",
+      "answer": "Hydration errors occur when the pre-rendered HTML sent by the server does not match the initial client render tree. Common causes include inspecting window/localStorage during initial render, non-deterministic dates/times (new Date()), invalid nested HTML (e.g. <p> inside <p> or <div> inside <p>), and browser extensions injecting DOM elements.",
+      "difficulty": "Advanced",
+      "topic": "Server-Side Rendering"
+    }
+  ],
+  "weeklySchedule": [
+    {
+      "week": 1,
+      "focus": "JSX Syntax, Component Thinking & Props",
+      "tasks": [
+        "Set up Vite or Next.js development environment",
+        "Build modular UI components with props and conditional rendering",
+        "Style basic components with modern Tailwind utility classes"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 2,
+      "focus": "State Management, Hooks & Event Handling",
+      "tasks": [
+        "Master useState and useEffect with practical exercises",
+        "Implement controlled inputs and form validations",
+        "Build Beginner Project: Interactive Task Tracker"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 3,
+      "focus": "Context API, Custom Hooks & Server Fetching",
+      "tasks": [
+        "Extract reusable custom hooks like useDebounce and useLocalStorage",
+        "Integrate TanStack Query for caching asynchronous REST APIs",
+        "Build GitHub Explorer dashboard project"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 4,
+      "focus": "Next.js App Router & Server Components",
+      "tasks": [
+        "Learn nested layouts, route groups, and loading/error states",
+        "Differentiate React Server Components from Client Components",
+        "Implement Server Actions for form submissions"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 5,
+      "focus": "Full-Stack SaaS Platform Architecture",
+      "tasks": [
+        "Connect Next.js to PostgreSQL database via Prisma ORM",
+        "Implement responsive UI with shadcn/ui components and Framer Motion",
+        "Develop core features and dashboards of the Capstone project"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 6,
+      "focus": "Testing, Accessibility & Production Release",
+      "tasks": [
+        "Write component unit tests with React Testing Library",
+        "Audit accessibility (WCAG AA) and optimize Core Web Vitals",
+        "Deploy to Vercel and review React interview questions"
+      ],
+      "hours": 10
+    }
+  ]
+}

@@ -1,0 +1,296 @@
+{
+  "overview": "A production-grade, hands-on curriculum guiding engineers from basic containerization concepts and Dockerfile optimization to multi-stage builds, Docker Compose orchestrations, networking, volume persistence, and seamless CI/CD pipeline deployments for DevOps Engineers.",
+  "technology": "Docker",
+  "level": "Beginner",
+  "goal": "DevOps/Cloud Engineer",
+  "prerequisites": [
+    "Fundamental Linux shell navigation and command line utilities",
+    "Basic knowledge of web servers and client-server networking (ports, IP)",
+    "Familiarity with at least one programming language runtime (Node.js, Python, or Go)"
+  ],
+  "modules": [
+    {
+      "order": 1,
+      "title": "Container Fundamentals & Core Docker CLI",
+      "estimatedHours": 16,
+      "topics": [
+        {
+          "title": "Containers vs Virtual Machines & Linux Namespaces",
+          "description": "Understanding Linux cgroups, namespaces, chroot, container runtime engines (containerd, runc), and kernel sharing.",
+          "resources": [
+            { "label": "Docker Overview & Architecture", "type": "docs", "searchQuery": "Docker overview architecture documentation" },
+            { "label": "Docker for Beginners Course", "type": "video", "searchQuery": "Docker tutorial for beginners full course" }
+          ]
+        },
+        {
+          "title": "Docker CLI Essentials & Lifecycle Management",
+          "description": "docker run, stop, ps, logs, exec, inspect, prune, and managing container lifecycles safely.",
+          "resources": [
+            { "label": "Docker CLI Reference Guide", "type": "docs", "searchQuery": "Docker CLI command line reference" },
+            { "label": "Interactive Docker Practice", "type": "practice", "searchQuery": "Play with Docker classroom lab exercises" }
+          ]
+        },
+        {
+          "title": "Docker Images, Registries & Tagging",
+          "description": "Pulling official images, understanding image layers, semantic version tagging, and pushing to Docker Hub or GitHub Container Registry (GHCR).",
+          "resources": [
+            { "label": "Managing Docker Images", "type": "article", "searchQuery": "Docker images layers and registries guide" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Writing Production Dockerfiles & Image Optimization",
+      "estimatedHours": 20,
+      "topics": [
+        {
+          "title": "Dockerfile Directives & Best Practices",
+          "description": "FROM, WORKDIR, COPY vs ADD, RUN layer caching, CMD vs ENTRYPOINT, ENV, and non-root USER security hardening.",
+          "resources": [
+            { "label": "Dockerfile Best Practices Guide", "type": "docs", "searchQuery": "Dockerfile best practices guide official" }
+          ]
+        },
+        {
+          "title": "Multi-Stage Builds & Distroless Images",
+          "description": "Drastically slashing image size from 1GB to <50MB using multi-stage compilation, Alpine bases, and Google Distroless containers.",
+          "resources": [
+            { "label": "Multi-Stage Builds Documentation", "type": "docs", "searchQuery": "Docker multi stage builds documentation" }
+          ]
+        },
+        {
+          "title": "Caching Optimization (.dockerignore & BuildKit)",
+          "description": "Leveraging Docker BuildKit, mount=type=cache, order of operations to maximize build cache hits across pipeline runs.",
+          "resources": [
+            { "label": "Docker BuildKit Caching", "type": "article", "searchQuery": "Docker BuildKit cache mounts acceleration" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Storage, Networking & Docker Compose",
+      "estimatedHours": 22,
+      "topics": [
+        {
+          "title": "Volume Management & Persistent Storage",
+          "description": "Anonymous vs named volumes, bind mounts for rapid local live-reloading, and data backup/restore workflows.",
+          "resources": [
+            { "label": "Docker Storage and Volumes", "type": "docs", "searchQuery": "Docker storage manage data in containers volumes" }
+          ]
+        },
+        {
+          "title": "Container Networking & DNS Resolution",
+          "description": "Bridge networks, host networking, overlay networks, container DNS discovery, and exposed vs published ports.",
+          "resources": [
+            { "label": "Docker Networking In-Depth", "type": "docs", "searchQuery": "Docker networking overview bridge host" }
+          ]
+        },
+        {
+          "title": "Multi-Container Orchestration with Docker Compose",
+          "description": "Declarative docker-compose.yml, service dependencies (depends_on with condition: service_healthy), environment files, and healthchecks.",
+          "resources": [
+            { "label": "Docker Compose Specification", "type": "docs", "searchQuery": "Docker Compose file reference documentation" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Security, CI/CD Integration & Kubernetes Hand-off",
+      "estimatedHours": 18,
+      "topics": [
+        {
+          "title": "Container Security & Vulnerability Scanning",
+          "description": "Scanning images with Docker Scout / Trivy, rootless Docker execution, Linux capabilities, and read-only root filesystems.",
+          "resources": [
+            { "label": "Trivy Container Scanning Guide", "type": "docs", "searchQuery": "Trivy vulnerability scanner Docker containers" }
+          ]
+        },
+        {
+          "title": "Automated CI/CD with GitHub Actions",
+          "description": "Building, scanning, and publishing multi-arch images (AMD64/ARM64) to container registries on Git tag/push.",
+          "resources": [
+            { "label": "Publishing Docker Images with GitHub Actions", "type": "article", "searchQuery": "GitHub Actions build push Docker image workflow" }
+          ]
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Zero-Config Development Environment Container",
+      "difficulty": "beginner",
+      "description": "Package a Node.js or Python application with hot-reloading using bind mounts, so new contributors can boot the project with a single command.",
+      "skills": ["Dockerfile", "Bind Mounts", "Environment Variables"],
+      "features": [
+        "Dockerfile configured with development dependencies",
+        "Hot reload code changes automatically without container restarts",
+        "Non-root user execution for host permission safety"
+      ],
+      "stretchGoals": [
+        "Add a health check instruction",
+        "Implement a .dockerignore file reducing build context size"
+      ]
+    },
+    {
+      "title": "Multi-Tier Web Stack with Docker Compose",
+      "difficulty": "intermediate",
+      "description": "Orchestrate a complete full-stack environment consisting of Next.js frontend, Express backend, PostgreSQL database, and Redis caching.",
+      "skills": ["Docker Compose", "Named Volumes", "Bridge Networks", "Healthchecks"],
+      "features": [
+        "Declarative docker-compose.yml file linking 4 microservices",
+        "Named volumes for persistent database storage across restarts",
+        "Automated health checks ensuring database readiness before backend starts"
+      ],
+      "stretchGoals": [
+        "Add Nginx reverse proxy routing port 80 traffic",
+        "Create database seed scripts triggered on first boot"
+      ]
+    },
+    {
+      "title": "Ultra-Lean Multi-Stage Production Images",
+      "difficulty": "advanced",
+      "description": "Refactor a heavy monolithic enterprise app into an optimized, minimal multi-stage image (<30MB) running on Distroless or Alpine.",
+      "skills": ["Multi-Stage Builds", "Distroless", "BuildKit", "Security Hardening"],
+      "features": [
+        "Isolated build stage containing SDKs and compilation tools",
+        "Stripped runtime stage with only binary and necessary dependencies",
+        "Zero CVEs detected by Trivy scanner"
+      ],
+      "stretchGoals": [
+        "Support multi-architecture builds (linux/amd64 and linux/arm64)",
+        "Implement SBOM (Software Bill of Materials) generation"
+      ]
+    },
+    {
+      "title": "Automated Cloud Deploy Pipeline with GitHub Actions & AWS",
+      "difficulty": "capstone",
+      "description": "An automated pipeline that lints, builds multi-arch containers, executes vulnerability scans, pushes to registry, and deploys to cloud infrastructure.",
+      "skills": ["GitHub Actions", "Docker Scout / Trivy", "AWS ECR / ECS", "Security"],
+      "features": [
+        "Automated build and test pipeline on every pull request",
+        "Trivy security gate failing build if critical CVEs are detected",
+        "Automated rolling deployment to cloud cluster"
+      ],
+      "stretchGoals": [
+        "Add slack notifications on deploy status",
+        "Automate rollback on failed health check"
+      ]
+    }
+  ],
+  "practiceProblems": [
+    {
+      "title": "Optimize Docker Layer Caching for Node.js Dependencies",
+      "difficulty": "easy",
+      "topic": "Dockerfile Optimization",
+      "hint": "COPY package*.json and run npm install BEFORE copying the rest of your source code."
+    },
+    {
+      "title": "PostgreSQL Container Backup & Restore Script",
+      "difficulty": "medium",
+      "topic": "Volumes & CLI",
+      "hint": "Use docker exec with pg_dump piped to a local SQL file, then restore via docker exec -i."
+    },
+    {
+      "title": "Configure Dynamic DNS Discovery between Compose Services",
+      "difficulty": "medium",
+      "topic": "Networking",
+      "hint": "Services on the same user-defined bridge network can communicate using their service name as the hostname."
+    },
+    {
+      "title": "Fix Broken Multi-Stage Build with Non-Root Permissions",
+      "difficulty": "hard",
+      "topic": "Security & Permissions",
+      "hint": "Ensure the non-root user owns the WORKDIR directory before running COPY --chown=appuser:appuser."
+    }
+  ],
+  "interviewQuestions": [
+    {
+      "question": "What is the difference between CMD and ENTRYPOINT in a Dockerfile?",
+      "answer": "ENTRYPOINT specifies the immutable command or executable that will always run when the container starts. CMD provides default arguments to the ENTRYPOINT, which can be easily overridden by passing CLI arguments to 'docker run'.",
+      "difficulty": "Beginner",
+      "topic": "Dockerfile Directives"
+    },
+    {
+      "question": "How do Docker images utilize Copy-On-Write (CoW) filesystems?",
+      "answer": "Docker image layers are strictly read-only. When a container runs, Docker attaches a thin, writable container layer on top using union filesystems (like overlay2). Any modification to an existing file copies the file from the lower read-only layer into the top writable layer, preserving image immutability and saving disk space.",
+      "difficulty": "Intermediate",
+      "topic": "Storage & Internals"
+    },
+    {
+      "question": "What is the difference between a bind mount and a named volume?",
+      "answer": "Bind mounts map an arbitrary file or directory from the host filesystem into the container, reliant on host directory structure and permissions (ideal for source code during local dev). Named volumes are managed entirely by Docker inside its storage directory (/var/lib/docker/volumes/), offering superior performance, portability, and backup capabilities (ideal for databases in production).",
+      "difficulty": "Intermediate",
+      "topic": "Storage"
+    },
+    {
+      "question": "How do you minimize container security vulnerabilities in production?",
+      "answer": "1) Run as a non-root USER; 2) Use minimal base images like Distroless or Alpine; 3) Drop unnecessary Linux capabilities (--cap-drop=ALL); 4) Use multi-stage builds to avoid leaking compiler tools and secrets; 5) Scan images in CI/CD using Trivy; 6) Set the root filesystem to read-only (--read-only).",
+      "difficulty": "Advanced",
+      "topic": "Security Hardening"
+    }
+  ],
+  "weeklySchedule": [
+    {
+      "week": 1,
+      "focus": "Container Architecture, CLI Basics & Running Containers",
+      "tasks": [
+        "Install Docker Desktop or Docker Engine on Linux/WSL2",
+        "Practice CLI commands: run, exec, ps, stop, logs, inspect",
+        "Run Nginx and Postgres containers with port publishing"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 2,
+      "focus": "Writing Dockerfiles & Layer Caching",
+      "tasks": [
+        "Create Dockerfile for a sample web application",
+        "Understand layer caching to optimize build times",
+        "Build Beginner Project: Zero-Config Development Container"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 3,
+      "focus": "Persistent Storage & Docker Networking",
+      "tasks": [
+        "Create named volumes and test database data persistence across restarts",
+        "Set up custom bridge networks and test container ping communication",
+        "Solve container networking practice problems"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 4,
+      "focus": "Docker Compose Multi-Container Stacks",
+      "tasks": [
+        "Write docker-compose.yml with depends_on and healthchecks",
+        "Connect web service, PostgreSQL database, and Redis cache",
+        "Build Intermediate Project: Multi-Tier Web Stack"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 5,
+      "focus": "Multi-Stage Builds & Security Hardening",
+      "tasks": [
+        "Convert single-stage builds into multi-stage Dockerfiles",
+        "Implement non-root security and scan images with Trivy",
+        "Slash image size by over 80%"
+      ],
+      "hours": 10
+    },
+    {
+      "week": 6,
+      "focus": "CI/CD Deployment Pipeline & Capstone Project",
+      "tasks": [
+        "Build GitHub Actions workflow to build and push images to GHCR",
+        "Complete and document the automated Capstone Deployment Pipeline",
+        "Review Docker and containerization interview flashcards"
+      ],
+      "hours": 10
+    }
+  ]
+}

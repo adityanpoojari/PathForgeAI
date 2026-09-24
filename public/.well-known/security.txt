@@ -1,0 +1,6 @@
+Contact: mailto:security@pathforge.ai
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en
+Policy: https://pathforge.ai/security
+Canonical: https://pathforge.ai/.well-known/security.txt
+Acknowledgments: https://pathforge.ai/acknowledgments

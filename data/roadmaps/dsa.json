@@ -1,0 +1,303 @@
+{
+  "overview": "A rigorous, interview-focused masterclass in Data Structures and Algorithms designed for technical placement preparation and coding interviews at top tech companies. Covers Big-O analysis, fundamental and non-linear data structures, dynamic programming, graph theory, and algorithmic intuition.",
+  "technology": "Data Structures and Algorithms",
+  "level": "Intermediate",
+  "goal": "Placement/Interview Prep",
+  "prerequisites": [
+    "Proficiency in one programming language (Java, C++, Python, or JavaScript)",
+    "Understanding of loops, functions, recursion basics, and memory allocation",
+    "Familiarity with discrete math concepts (sets, permutations, logarithms)"
+  ],
+  "modules": [
+    {
+      "order": 1,
+      "title": "Time/Space Complexity & Linear Structures",
+      "estimatedHours": 18,
+      "topics": [
+        {
+          "title": "Asymptotic Analysis & Big-O Notation",
+          "description": "Worst, average, and best-case analysis, amortized time complexity, space complexity stacks, and solving recurrences with Master Theorem.",
+          "resources": [
+            { "label": "Big-O Cheatsheet & Analysis", "type": "docs", "searchQuery": "Big-O cheatsheet time complexity table" },
+            { "label": "Asymptotic Complexity Masterclass", "type": "video", "searchQuery": "Big O notation time and space complexity tutorial" }
+          ]
+        },
+        {
+          "title": "Arrays, Two-Pointers & Sliding Window",
+          "description": "Fixed and dynamic sliding windows, fast/slow pointers (Floyd's cycle detection), and prefix-sum arrays.",
+          "resources": [
+            { "label": "Two Pointers Technique Guide", "type": "article", "searchQuery": "Two pointers and sliding window algorithm patterns" },
+            { "label": "Sliding Window Coding Drills", "type": "practice", "searchQuery": "Leetcode sliding window practice problems list" }
+          ]
+        },
+        {
+          "title": "Linked Lists, Stacks & Monotonic Structures",
+          "description": "Singly & doubly linked lists, sentinel nodes, fast/slow reversals, and monotonic stack patterns (Next Greater Element).",
+          "resources": [
+            { "label": "Monotonic Stack Pattern Tutorial", "type": "article", "searchQuery": "Monotonic stack pattern guide leetcode" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Trees, Binary Search Trees & Heaps",
+      "estimatedHours": 24,
+      "topics": [
+        {
+          "title": "Binary Tree Traversals (BFS & DFS)",
+          "description": "Pre-order, in-order, post-order recursive and iterative traversals, level-order traversal, and tree diameter algorithms.",
+          "resources": [
+            { "label": "Binary Tree Traversal Deep Dive", "type": "docs", "searchQuery": "Binary tree traversals preorder inorder postorder BFS" }
+          ]
+        },
+        {
+          "title": "Binary Search Trees (BST) & Self-Balancing Trees",
+          "description": "BST invariant properties, insertion, deletion with in-order predecessor/successor, and AVL/Red-Black rotational concepts.",
+          "resources": [
+            { "label": "BST Properties & Balance", "type": "video", "searchQuery": "Binary Search Tree operations and AVL trees" }
+          ]
+        },
+        {
+          "title": "Priority Queues & Binary Heaps",
+          "description": "Min-heap and max-heap array representations, heapify in O(n), percolate up/down, and Top K Frequent elements pattern.",
+          "resources": [
+            { "label": "Heap Data Structure Guide", "type": "article", "searchQuery": "Priority Queue Heap data structure explained" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Graph Algorithms & Shortest Path",
+      "estimatedHours": 26,
+      "topics": [
+        {
+          "title": "Graph Representations, BFS & DFS",
+          "description": "Adjacency matrix vs adjacency list, connected components, cycle detection in directed and undirected graphs.",
+          "resources": [
+            { "label": "Graph Theory Algorithms", "type": "docs", "searchQuery": "Graph theory BFS DFS algorithms" }
+          ]
+        },
+        {
+          "title": "Topological Sort & Disjoint Set Union (DSU / Kruskal)",
+          "description": "Kahn's in-degree BFS algorithm, DFS finish-time ordering, and Disjoint Set with Path Compression and Union by Rank.",
+          "resources": [
+            { "label": "Disjoint Set Union (Union Find)", "type": "article", "searchQuery": "Union Find Disjoint Set Union by Rank Path Compression" }
+          ]
+        },
+        {
+          "title": "Dijkstra's Algorithm & Bellman-Ford",
+          "description": "Single-source shortest path using priority queues, negative weight cycles detection, and A* heuristic fundamentals.",
+          "resources": [
+            { "label": "Dijkstra Algorithm Explained", "type": "video", "searchQuery": "Dijkstra algorithm shortest path with priority queue" }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Dynamic Programming (DP) & Backtracking",
+      "estimatedHours": 28,
+      "topics": [
+        {
+          "title": "Recursion, Memoization & Tabulation",
+          "description": "Identifying optimal substructure and overlapping subproblems, top-down memoization vs bottom-up iterative DP tables.",
+          "resources": [
+            { "label": "Dynamic Programming Patterns", "type": "docs", "searchQuery": "Dynamic programming patterns guide Leetcode" }
+          ]
+        },
+        {
+          "title": "Classic DP Paradigms (0/1 Knapsack, LCS, LIS)",
+          "description": "0/1 Knapsack, Longest Common Subsequence, Longest Increasing Subsequence in O(n log n) with patience sorting, and Coin Change.",
+          "resources": [
+            { "label": "0/1 Knapsack Problem Tutorial", "type": "video", "searchQuery": "0 1 Knapsack problem dynamic programming" }
+          ]
+        },
+        {
+          "title": "Backtracking & Constraint Satisfaction",
+          "description": "State-space trees, pruning dead branches, N-Queens problem, Sudoku solver, and generating subsets/permutations.",
+          "resources": [
+            { "label": "Backtracking Pattern Cheatsheet", "type": "article", "searchQuery": "Backtracking algorithm patterns subsets permutations" }
+          ]
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Algorithmic Complexity & Benchmark Visualizer",
+      "difficulty": "beginner",
+      "description": "A benchmarking tool that empirically times bubble sort, merge sort, and quicksort across varying array sizes and plots growth curves.",
+      "skills": ["Benchmarking", "Sorting Algorithms", "Data Visualization", "Empirical Big-O"],
+      "features": [
+        "Generate random, sorted, and reversed input datasets",
+        "Empirical measurement of millisecond runtime vs N",
+        "Compare O(n^2) vs O(n log n) scaling curves"
+      ],
+      "stretchGoals": [
+        "Include memory consumption profiling",
+        "Export benchmark results to HTML report"
+      ]
+    },
+    {
+      "title": "Interactive Sorting & Pathfinding Visualizer",
+      "difficulty": "intermediate",
+      "description": "A web visualizer rendering real-time step-by-step animations for sorting algorithms (QuickSort, MergeSort) and pathfinding (A*, Dijkstra).",
+      "skills": ["Graph Theory", "Dijkstra", "Sorting", "Async Generators"],
+      "features": [
+        "Interactive grid allowing users to draw walls, start, and end nodes",
+        "Step-by-step visualization of visited nodes and computed shortest path",
+        "Speed controls and customizable heuristic metrics"
+      ],
+      "stretchGoals": [
+        "Add maze generation algorithms (Recursive Division / Prim's)",
+        "Support diagonal movement with weighted terrain tiles"
+      ]
+    },
+    {
+      "title": "High-Throughput In-Memory Key-Value Store with TTL & LRU",
+      "difficulty": "advanced",
+      "description": "An in-memory caching engine utilizing HashMaps and Doubly-Linked Lists supporting O(1) gets, sets, eviction, and TTL expirations.",
+      "skills": ["Doubly-Linked List", "HashMap", "Concurrency", "LRU Eviction"],
+      "features": [
+        "O(1) amortized get, put, and delete operations",
+        "LRU eviction policy when max capacity is reached",
+        "Background sweeper thread pruning expired TTL keys"
+      ],
+      "stretchGoals": [
+        "Implement thread safety using ReadWriteLocks",
+        "Persist snapshot dumps to disk using append-only log"
+      ]
+    },
+    {
+      "title": "Autocomplete Search Engine using Trie & Priority Queue",
+      "difficulty": "capstone",
+      "description": "A low-latency prefix search engine indexing millions of terms into an optimized Prefix Tree (Trie) returning Top 5 suggestions in <2ms.",
+      "skills": ["Trie Data Structure", "Priority Queue", "String Hashing", "Optimization"],
+      "features": [
+        "Trie insertion and prefix traversal supporting millions of words",
+        "Frequency tracking returning Top K weighted suggestions",
+        "Fuzzy prefix matching handling single-character typos (Levenshtein distance)"
+      ],
+      "stretchGoals": [
+        "Serialize Trie to binary compact file format",
+        "Package as a high-speed HTTP microservice"
+      ]
+    }
+  ],
+  "practiceProblems": [
+    {
+      "title": "Trapping Rain Water",
+      "difficulty": "medium",
+      "topic": "Two Pointers",
+      "hint": "Maintain left_max and right_max pointers moving inwards, calculating trapped water bounded by the smaller peak."
+    },
+    {
+      "title": "Course Schedule (Cycle in Directed Graph)",
+      "difficulty": "medium",
+      "topic": "Graphs & Topological Sort",
+      "hint": "Use Kahn's algorithm with an in-degree array, or DFS with 3 states (unvisited, visiting, visited)."
+    },
+    {
+      "title": "Word Break (Dynamic Programming)",
+      "difficulty": "medium",
+      "topic": "Dynamic Programming",
+      "hint": "dp[i] represents whether s[0...i] can be segmented; check if dp[j] is true and s[j...i] exists in the word dictionary."
+    },
+    {
+      "title": "Median of Two Sorted Arrays",
+      "difficulty": "hard",
+      "topic": "Binary Search",
+      "hint": "Binary search on the partition point of the smaller array to achieve O(log(min(m, n))) time."
+    }
+  ],
+  "interviewQuestions": [
+    {
+      "question": "What is the difference between Array and LinkedList in terms of memory cache locality?",
+      "answer": "Arrays allocate contiguous memory blocks, which allows the CPU hardware prefetcher to load adjacent elements into L1/L2 caches efficiently (high cache locality). LinkedLists allocate scattered nodes across heap memory with pointer chasing, resulting in frequent CPU cache misses and significantly slower sequential scans despite theoretical O(1) insertions.",
+      "difficulty": "Beginner",
+      "topic": "Memory & Hardware"
+    },
+    {
+      "question": "Explain QuickSort worst-case time complexity and how to avoid it.",
+      "answer": "QuickSort has an average complexity of O(n log n). However, if the pivot chosen is consistently the smallest or largest element (such as choosing the first element on already sorted data), partitions become heavily unbalanced (size 1 and n-1), resulting in O(n^2) worst-case time. It can be mitigated by choosing pivots randomly (Randomized QuickSort), using Median-of-Three pivot selection, or switching to Introsort.",
+      "difficulty": "Intermediate",
+      "topic": "Sorting Algorithms"
+    },
+    {
+      "question": "How does Disjoint Set Union (Union-Find) achieve near O(1) time complexity?",
+      "answer": "By combining two key optimizations: 1) Path Compression (flattening tree structure during find operations so every node points directly to the root), and 2) Union by Rank/Size (attaching the shallower tree under the deeper tree). This reduces time per operation to O(alpha(n)), where alpha is the Inverse Ackermann function, effectively constant (<= 4) for all practical universe scales.",
+      "difficulty": "Advanced",
+      "topic": "Advanced Data Structures"
+    },
+    {
+      "question": "How do you systematically approach a dynamic programming problem in an interview?",
+      "answer": "1) Define the subproblem in plain English (e.g. dp[i][j]); 2) Identify the base cases; 3) Formulate the state transition recurrence relation; 4) Determine the evaluation order (top-down memoization vs bottom-up table); 5) Analyze time/space complexity and optimize space (e.g. rolling array variables).",
+      "difficulty": "Intermediate",
+      "topic": "Interview Strategy"
+    }
+  ],
+  "weeklySchedule": [
+    {
+      "week": 1,
+      "focus": "Time Complexity, Two Pointers & Sliding Window",
+      "tasks": [
+        "Review Big-O formal definitions and master recurrence relations",
+        "Solve 10 problems on Two Pointers and Sliding Window techniques",
+        "Build Algorithmic Benchmark Visualizer"
+      ],
+      "hours": 14
+    },
+    {
+      "week": 2,
+      "focus": "Stacks, Queues, Linked Lists & Monotonic Patterns",
+      "tasks": [
+        "Implement custom Doubly-Linked List and Stack",
+        "Master Next Greater Element with Monotonic Stacks",
+        "Solve LeetCode Top 75 linked list challenges"
+      ],
+      "hours": 14
+    },
+    {
+      "week": 3,
+      "focus": "Trees, BST & Priority Queues",
+      "tasks": [
+        "Implement tree DFS and BFS iterative and recursive variations",
+        "Practice Top K elements with Min-Heaps",
+        "Start In-Memory Key-Value Store project"
+      ],
+      "hours": 14
+    },
+    {
+      "week": 4,
+      "focus": "Graph Algorithms & Disjoint Set Union",
+      "tasks": [
+        "Implement BFS/DFS cycle detection in directed graphs",
+        "Solve Course Schedule and Topological Sort questions",
+        "Build Interactive Pathfinding Visualizer"
+      ],
+      "hours": 14
+    },
+    {
+      "week": 5,
+      "focus": "Dynamic Programming Masterclass",
+      "tasks": [
+        "Master 1D DP: House Robber, Coin Change, Climing Stairs",
+        "Tackle 2D DP: Longest Common Subsequence and Knapsack",
+        "Practice space optimization from O(n) to O(1)"
+      ],
+      "hours": 14
+    },
+    {
+      "week": 6,
+      "focus": "Trie Data Structure, Capstone & Mock Interviews",
+      "tasks": [
+        "Build and benchmark Autocomplete Search Engine using Trie",
+        "Complete 3 timed mock interview sessions under 45-minute limits",
+        "Review algorithmic edge cases and technical behavioral stories"
+      ],
+      "hours": 14
+    }
+  ]
+}
