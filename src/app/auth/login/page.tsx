@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Compass, Sparkles, Lock, Mail, ArrowRight, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Compass, Lock, Mail, ArrowRight, AlertCircle, CheckCircle2 } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -41,12 +41,6 @@ export default function LoginPage() {
       setError("An unexpected network error occurred. Please try again.");
       setLoading(false);
     }
-  };
-
-  const fillDemo = () => {
-    setEmail("demo@pathforge.ai");
-    setPassword("Password123!");
-    setError(null);
   };
 
   return (
@@ -148,18 +142,6 @@ export default function LoginPage() {
               )}
             </button>
           </form>
-
-          {/* Quick Demo Fill button */}
-          <div className="pt-2">
-            <button
-              type="button"
-              onClick={fillDemo}
-              className="w-full py-2 px-3 rounded-xl border border-dashed border-indigo-300 dark:border-indigo-800 bg-indigo-50/40 dark:bg-indigo-950/20 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100/50 dark:hover:bg-indigo-900/40 transition-colors flex items-center justify-center gap-1.5"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Fill Demo Credentials (demo@pathforge.ai)</span>
-            </button>
-          </div>
         </div>
 
         {/* Footer link */}
