@@ -9,13 +9,20 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const paths = await prisma.learningPath.findMany({
-      where: { userId: user.id },
-      orderBy: { createdAt: "desc" },
-    });
-
     const progressRecords = await prisma.progress.findMany({
       where: { userId: user.id },
+    });
+
+    const userProgressPathIds = Array.from(new Set(progressRecords.map((pr) => pr.learningPathId)));
+
+    const paths = await prisma.learningPath.findMany({
+      where: {
+        OR: [
+          { userId: user.id },
+          { id: { in: userProgressPathIds } },
+        ],
+      },
+      orderBy: { createdAt: "desc" },
     });
 
     // Group progress records strictly by learningPathId
@@ -25,7 +32,7 @@ export async function GET() {
     const allCompletedProblemKeys = new Set<string>();
 
     progressRecords.forEach((pr) => {
-      if (!pr.completed) return;
+      if (!pr.completed || pr.itemId === "enrolled") return;
       const globalKey = `${pr.learningPathId}:${pr.itemId}`;
       if (pr.itemType === "topic") {
         allCompletedTopicKeys.add(globalKey);

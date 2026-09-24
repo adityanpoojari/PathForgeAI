@@ -23,12 +23,32 @@ export async function POST(req: Request) {
     }
 
     // Associate with user
-    const updated = await prisma.learningPath.update({
-      where: { id: pathId },
-      data: { userId: user.id },
-    });
+    if (!existing.userId) {
+      await prisma.learningPath.update({
+        where: { id: pathId },
+        data: { userId: user.id },
+      });
+    } else if (existing.userId !== user.id) {
+      await prisma.progress.upsert({
+        where: {
+          userId_learningPathId_itemId: {
+            userId: user.id,
+            learningPathId: pathId,
+            itemId: "enrolled",
+          },
+        },
+        update: {},
+        create: {
+          userId: user.id,
+          learningPathId: pathId,
+          itemId: "enrolled",
+          itemType: "topic",
+          completed: false,
+        },
+      });
+    }
 
-    return NextResponse.json({ success: true, message: "Path saved to your dashboard!", path: updated });
+    return NextResponse.json({ success: true, message: "Path saved to your dashboard!" });
   } catch (error) {
     console.error("Save path error:", error);
     return NextResponse.json({ error: "Failed to save path" }, { status: 500 });

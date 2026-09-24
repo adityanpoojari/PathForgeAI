@@ -31,6 +31,12 @@ export async function GET(
     let notes: any[] = [];
 
     if (user) {
+      if (!pathRecord.userId) {
+        await prisma.learningPath.update({
+          where: { id: pathRecord.id },
+          data: { userId: user.id },
+        });
+      }
       progressRecords = await prisma.progress.findMany({
         where: { userId: user.id, learningPathId: pathRecord.id },
       });
@@ -57,6 +63,7 @@ export async function GET(
       progress: progressRecords,
       notes,
       isOwner: user?.id === pathRecord.userId,
+      isAuthenticated: !!user,
     });
   } catch (error) {
     console.error("Get path by id error:", error);

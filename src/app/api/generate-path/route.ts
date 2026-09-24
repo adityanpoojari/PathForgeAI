@@ -43,6 +43,42 @@ export async function POST(req: Request) {
 
     if (cached) {
       console.log(`[Cache Hit] Returning cached roadmap for hash: ${hash.slice(0, 10)}...`);
+
+      // Auto-save to dashboard for logged-in users
+      if (user) {
+        try {
+          const existingPath = await prisma.learningPath.findUnique({
+            where: { id: cached.pathId },
+          });
+          if (existingPath && !existingPath.userId) {
+            await prisma.learningPath.update({
+              where: { id: cached.pathId },
+              data: { userId: user.id },
+            });
+          } else if (existingPath && existingPath.userId !== user.id) {
+            await prisma.progress.upsert({
+              where: {
+                userId_learningPathId_itemId: {
+                  userId: user.id,
+                  learningPathId: cached.pathId,
+                  itemId: "enrolled",
+                },
+              },
+              update: {},
+              create: {
+                userId: user.id,
+                learningPathId: cached.pathId,
+                itemId: "enrolled",
+                itemType: "topic",
+                completed: false,
+              },
+            });
+          }
+        } catch (e) {
+          console.error("Auto-save cached path error:", e);
+        }
+      }
+
       return NextResponse.json({
         success: true,
         data: cached.output,

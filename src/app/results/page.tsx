@@ -59,8 +59,28 @@ function ResultsContent() {
   const [copiedShare, setCopiedShare] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [autoSaveNotif, setAutoSaveNotif] = useState(false);
 
   useEffect(() => {
+    // 0. Check auth status and auto-save roadmap for signed-in users
+    fetch("/api/auth/me")
+      .then((res) => res.json())
+      .then((authData) => {
+        if (authData?.authenticated) {
+          setIsAuthenticated(true);
+          setSaveSuccess(true);
+          if (pathId) {
+            fetch("/api/paths/save", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ pathId }),
+            }).catch(() => {});
+          }
+        }
+      })
+      .catch(() => {});
+
     // 1. Try loading from sessionStorage first (instant preview from generator)
     const cachedSession = sessionStorage.getItem("pathforge_current_result");
     if (cachedSession) {
@@ -81,6 +101,10 @@ function ResultsContent() {
       fetch(`/api/paths/${pathId}`)
         .then((res) => res.json())
         .then((resData) => {
+          if (resData?.isAuthenticated) {
+            setIsAuthenticated(true);
+            setSaveSuccess(true);
+          }
           if (resData.success && resData.path?.content) {
             setData(resData.path.content);
             if (resData.progress) {
@@ -113,6 +137,11 @@ function ResultsContent() {
   const toggleComplete = async (itemId: string, itemType: "topic" | "project" | "problem") => {
     const nextVal = !completedItems[itemId];
     setCompletedItems((prev) => ({ ...prev, [itemId]: nextVal }));
+
+    if (isAuthenticated) {
+      setAutoSaveNotif(true);
+      setTimeout(() => setAutoSaveNotif(false), 2000);
+    }
 
     if (pathId) {
       try {
@@ -253,6 +282,12 @@ function ResultsContent() {
                   <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] text-slate-500 font-semibold uppercase tracking-wider">
                     Engine: {providerUsed}
                   </span>
+                  {isAuthenticated && (
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 text-[11px] font-semibold flex items-center gap-1.5 shadow-xs">
+                      <Check className="w-3.5 h-3.5 text-emerald-500" />
+                      <span>{autoSaveNotif ? "Progress auto-saved!" : "Auto-Save Active"}</span>
+                    </span>
+                  )}
                 </div>
 
                 <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -278,23 +313,24 @@ function ResultsContent() {
 
               {/* Action Buttons Bar */}
               <div className="flex flex-wrap lg:flex-col items-stretch gap-2.5 min-w-[200px] no-print">
-                <button
-                  onClick={handleSavePath}
-                  disabled={saving || saveSuccess}
-                  className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-indigo-500/20 transition-all disabled:opacity-50"
-                >
-                  {saveSuccess ? (
-                    <>
-                      <Check className="w-4 h-4 text-emerald-300" />
-                      <span>Saved to Dashboard</span>
-                    </>
-                  ) : (
-                    <>
-                      <Save className="w-4 h-4" />
-                      <span>{saving ? "Saving..." : "Save to Dashboard"}</span>
-                    </>
-                  )}
-                </button>
+                {isAuthenticated ? (
+                  <Link
+                    href="/dashboard"
+                    className="px-4 py-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 transition-all shadow-xs"
+                    title="Progress is automatically saved. Click to view learning dashboard"
+                  >
+                    <Check className="w-4 h-4 text-emerald-500" />
+                    <span>Auto-Saved to Dashboard</span>
+                  </Link>
+                ) : (
+                  <Link
+                    href={`/auth/login?redirect=/results?id=${pathId || ""}`}
+                    className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-indigo-500/20 transition-all"
+                  >
+                    <Save className="w-4 h-4" />
+                    <span>Sign In to Auto-Save</span>
+                  </Link>
+                )}
 
                 <button
                   onClick={() => setShareModalOpen(true)}
